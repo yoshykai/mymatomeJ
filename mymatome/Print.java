@@ -23,6 +23,15 @@ public class Print{ //出力関数(System.out...を打ちたくない人用)
       pl(b);
     }
   }
+  public static void pr(short[]a){
+    int s = a.length;
+    pr(a[0]);
+    for(int i=1;i<s;i++){
+      sp();
+      pr(a[i]);
+    }
+    n();
+  }
   public static void pr(int[]a){
     int s = a.length;
     pr(a[0]);
@@ -49,6 +58,11 @@ public class Print{ //出力関数(System.out...を打ちたくない人用)
       pr(a[i]);
     }
     n();
+  }
+  public static void pr(short[][] a){ //2次元配列の出力
+    for(short i[]:a){
+      pr(i);
+    }
   }
   public static void pr(int[][] a){ //2次元配列の出力
     for(int i[]:a){

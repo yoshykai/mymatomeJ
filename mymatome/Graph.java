@@ -1,7 +1,7 @@
 package mymatome;
 
 public abstract class Graph{
-  int n; //頂点の数
+  public int n; //頂点の数
 
   public Graph(int m){ //コンストラクタ
     n=m;
