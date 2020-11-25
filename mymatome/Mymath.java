@@ -47,4 +47,16 @@ public class Mymath{
   public static double log(double a,double x){ //底aのlog(x)
     return Math.log10(x)/Math.log10(a);
   }
+
+  public static int pow(int x,int n){ //x^n
+    int k = 1;
+    while(n>1){
+      if(n%2==1){
+        k*=x;
+      }
+      x*=x;
+      n/=2;
+    }
+    return k*x;
+  }
 }

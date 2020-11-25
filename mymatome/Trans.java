@@ -6,7 +6,7 @@ public class Trans{
   public static int stoi(String s){
     return Integer.parseInt(s);
   }
-  public static int[] sstoi(String s[]){
+  public static int[] stoi(String s[]){
     int a[]=new int[s.length];
     for(int i=0;i<s.length;i++){
       a[i]=stoi(s[i]);
