@@ -41,6 +41,15 @@ public class Print{ //出力関数(System.out...を打ちたくない人用)
     }
     n();
   }
+  public static void pr(Integer[]a){
+    int s = a.length;
+    pr(a[0]);
+    for(int i=1;i<s;i++){
+      sp();
+      pr(a[i]);
+    }
+    n();
+  }
   public static void pr(String[]a){
     int s = a.length;
     pr(a[0]);

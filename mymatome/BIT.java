@@ -24,14 +24,6 @@ public class BIT{
     return k;
   }
 
-  private int twon(int x){
-    int i=1;
-    while(i<x){
-      i*=2;
-    }
-    return i;
-  }
-
   public void print(){
     Print.pr(ar);
   }

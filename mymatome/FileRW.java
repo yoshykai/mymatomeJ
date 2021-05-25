@@ -108,7 +108,7 @@ public class FileRW {
     return readL().split(" ");
   }
   public static int[] readIs(){
-    return Trans.sstoi(readSs());
+    return Trans.stoi(readSs());
   }
   public static long[] readLongs(){
     return Trans.stol(readSs());
