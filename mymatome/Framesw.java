@@ -6,7 +6,8 @@ import java.awt.*;
 public class Framesw extends JFrame{
   public Framesw(int w,int h){
     setSize(w, h);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setVisible(true);
   }
   public Framesw(int w,int h,JPanel p){
     this(w,h);

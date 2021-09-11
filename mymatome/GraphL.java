@@ -67,7 +67,6 @@ public class GraphL extends Graph{
 
   public int getEdge(int v1,int v2){
     Integer k = g2.get(v1).get(v2);
-    int r=0;
     if(k==null){
       return 0;
     }

@@ -1,95 +1,159 @@
 package mymatome;
 
-public abstract class Graph{
-  public int n; //頂点の数
-
-  public Graph(int m){ //コンストラクタ
-    n=m;
-  }
-
-  public int size(){ //グラフの頂点数
-    return n;
-  }
-
-  abstract public void add(int v1,int v2,int d); //v1,v2間にdのパスを張る
-  abstract public void add(int [][]a); //aは辺表示のグラフ
-  public void addM(int []a){ //無向辺を追加 a[0]->a[1]に重みa[2]の辺
-    add(a[0],a[1],a[2]);
-    add(a[1],a[0],a[2]);
-  }
-  public void addM(int v1,int v2,int d){
-    add(v1,v2,d);
-    add(v2,v1,d);
-  }
-  public void addM(int [][]a){
-    for(int i[]:a) {
-      addM(i);
+class Graph{
+  int n;
+  ArrayList<ArrayList<Edge>> g;
+  public Graph(int nn){
+    n=nn;
+    g=new ArrayList<ArrayList<Edge>>();
+    for(int i=0;i<n;i++){
+      g.add(new ArrayList<Edge>());
     }
   }
-  public void addY(int []a){ //有向辺を追加
-    add(a[0],a[1],a[2]);
+  public void add(int a,int b,int d){
+    g.get(a).add(new Edge(b,d));
+    g.get(b).add(new Edge(a,d));
   }
-  public void addY(int v1,int v2,int d){ //有向辺を追加
-    add(v1,v2,d);
+  public void addY(int a,int b,int d){
+    g.get(a).add(new Edge(b,d));
   }
-  public void addY(int [][]a){
-    for(int i[]:a){
-      addY(i);
-    }
+  public void add(int a,int b){
+    g.get(a).add(new Edge(b,1));
+    g.get(b).add(new Edge(a,1));
   }
-
-  abstract public void delete(int v1,int v2); //v1->v2の辺を削除
-  public void deleteM(int v1,int v2){ //v1,v2間の辺を削除
-    delete(v1,v2);
-    delete(v2,v1);
+  public void addY(int a,int b){
+    g.get(a).add(new Edge(b,1));
   }
-  public void deleteY(int v1,int v2){ //v1->v2の辺を削除
-    delete(v1,v2);
+  public int deg(int v){
+    return g2.get(v).size();
   }
 
-  abstract public void deleteVer(int v); //頂点vを削除
-
-  public static void printdist(int dist[][]){ //ダイクストラ用 距離の出力
-    int len = dist.length;
-    for(int i=0;i<len;i++){
-      Print.pr(i+":"+dist[i][0]+" ");
-      int num=dist[i][1];
-      String str=""+i;
-      while(num!=-1){
-        str=num+"->"+str;
-        num=dist[num][1];
-      }
-      Print.pl(str);
-    }
-  }
-
-  abstract public int deg(int v); //頂点vの次数
-  abstract public boolean isEdge(int v1,int v2); //v1->v2に辺が存在するか
-  abstract public int getEdge(int v1,int v2); //v1->v2の辺の重みを返す
-  abstract public Graph copy();
-  abstract public void print();
-
-  abstract public int[][] dijk(int v); //ダイクストラ法
-
-  public static GraphL atol(GraphA g){ //行列表示からリスト表示へ
-    GraphL l = new GraphL(g.size());
-    for(int i=0;i<g.size();i++){
-      for(int j=0;j<g.size();j++){
-        if(g.isEdge(i,j)){
-          l.add(i,j,g.getEdge(i,j));
+  public int[] dijkstra(int s){
+    int dist[]=new int[n];
+    for(int i=0;i<n;i++){dist[i]=Integer.MAX_VALUE;}
+    dist[s]=0;
+    PriorityQueue<int[]> q = new PriorityQueue<int[]>((a,b)->{
+      return a[1]-b[1];
+    });
+    q.add(new int[]{s,0});
+    while(q.size()>0){
+      int[] p = q.poll();
+      if(dist[p[0]]!=p[1]){continue;}
+      for(Edge e:g.get(p[0])){
+        if(dist[e.v]>dist[p[0]]+e.d){
+          dist[e.v]=dist[p[0]]+e.d;
+          q.add(new int[]{e.v,dist[e.v]});
         }
       }
     }
-    return l;
+    return dist;
   }
 
-  public static GraphA ltoa(GraphL g){ //リスト表示から行列表示へ
-    GraphA l = new GraphA(g.size());
-    for(int i=0;i<g.size();i++){
-      for(Integer j[]:g.g.get(i)){
-        l.add(i,j[0],j[1]);
+  public void dfs(int v){dfs(v,new boolean[n]);}
+
+  private void dfs(int v,boolean flg[]){
+    flg[v]=true;
+    for(Edge e:g.get(v)){
+      if(!flg[e.v]){
+        dfs(e.v,flg);
       }
     }
-    return l;
+  }
+
+  public void bfs(int s){
+    boolean flg[]=new boolean[n];
+    Queue<Integer> q = new ArrayDeque<Integer>();
+    q.add(s);
+    while(q.size()>0){
+      int v = q.poll();
+      flg[v]=true;
+      for(Edge e:g.get(v)){
+        if(!flg[e.v]){
+          q.add(e.v);
+          flg[e.v]=true;
+    }}}
+  }
+
+  public int minspantree(){
+    PriorityQueue<Edge> q = new PriorityQueue<Edge>(Comparator.comparing(Edge::getD));
+    boolean flg[]=new boolean[n];
+    int c=1,sum=0;
+    for(Edge e:g.get(0)){
+      q.add(e);
+    }
+    flg[0]=true;
+    while(c<n){
+      Edge e = q.poll();
+      if(flg[e.v]){continue;}
+      flg[e.v]=true;
+      sum+=e.d;
+      c++;
+      for(Edge i:g.get(e.v)){
+        if(!flg[i.v]){
+          q.add(i);
+        }
+      }
+    }
+    return sum;
+  }
+
+  public int[] scc(){
+    Graph g2 = new Graph(n);
+    for(int i=0;i<n;i++){
+      for(Edge e:g.get(i)){
+        g2.addY(e.v,i);
+      }
+    }
+    ArrayList<Integer> list = new ArrayList<Integer>();
+    boolean flg[]=new boolean[n];
+    for(int i=0;i<n;i++){
+      if(!flg[i]){
+        dfs_scc(i,flg,list);
+      }
+    }
+    return g2.scc2(list);
+  }
+
+  public int[] scc2(ArrayList<Integer>list){
+    boolean flg[]=new boolean[n];
+    int ren[]=new int[n];
+    int num=0;
+    for(int i=n-1;i>=0;i--){
+      int now = list.get(i);
+      if(!flg[now]){
+        dfs_scc2(now,flg,ren,num);
+        num++;
+      }
+    }
+    return ren;
+  }
+
+  private void dfs_scc(int v,boolean flg[],ArrayList<Integer>list){
+    flg[v]=true;
+    for(Edge e:g.get(v)){
+      if(!flg[e.v]){
+        dfs_scc(e.v,flg,list);
+      }
+    }
+    list.add(v);
+  }
+
+  private void dfs_scc2(int v,boolean flg[],int num[],int now){
+    flg[v]=true;
+    num[v]=now;
+    for(Edge e:g.get(v)){
+      if(!flg[e.v]){
+        dfs_scc2(e.v,flg,num,now);
+      }
+    }
+  }
+
+  static class Edge{
+    int v,d;
+    public Edge(int v,int d){
+      this.v=v;this.d=d;
+    }
+
+    public int getD(){return d;}
   }
 }
