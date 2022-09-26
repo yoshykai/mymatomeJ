@@ -68,4 +68,28 @@ public class Mymath{
     }
     return left * right;
   }
+
+  public static long modpow(long x,long n,long mod){
+    long r = 1;
+    while(n>=1){
+      if(1==(n&1)){
+        r = r*x % mod;
+      }
+      x = x*x % mod;
+      n/=2;
+    }
+    return r;
+  }
+  public static long modinv(long a,long mod){
+    long x1=1,x2=0;
+    long p=mod,q,t;
+    while(a%p!=0){
+      q = a/p;
+      t = x1-q*x2;
+      x1=x2; x2=t;
+      t=a%p;
+      a=p; p=t;
+    }
+    return x2<0 ? x2+mod : x2;
+  }
 }

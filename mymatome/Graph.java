@@ -28,10 +28,10 @@ public class Graph{
     return g2.get(v).size();
   }
 
-  public int[] dijkstra(int s){
-    int dist[]=new int[n];
-    for(int i=0;i<n;i++){dist[i]=Integer.MAX_VALUE;}
-    dist[s]=0;
+  public int[][] dijkstra(int s){
+    int dist[][]=new int[n][2];
+    for(int i=0;i<n;i++){dist[i][0]=Integer.MAX_VALUE;dist[i][1]=-2;}
+    dist[s][0]=0;dist[i][1]=-1;
     PriorityQueue<int[]> q = new PriorityQueue<int[]>((a,b)->{
       return a[1]-b[1];
     });
@@ -40,8 +40,9 @@ public class Graph{
       int[] p = q.poll();
       if(dist[p[0]]!=p[1]){continue;}
       for(Edge e:g.get(p[0])){
-        if(dist[e.v]>dist[p[0]]+e.d){
-          dist[e.v]=dist[p[0]]+e.d;
+        if(dist[e.v][0]>dist[p[0]][0]+e.d){
+          dist[e.v][0]=dist[p[0]][0]+e.d;
+          dist[e.v][1] = p[0];
           q.add(new int[]{e.v,dist[e.v]});
         }
       }
