@@ -1,6 +1,6 @@
 package mymatome;
 
-class Graph{
+public class Graph{
   int n;
   ArrayList<ArrayList<Edge>> g;
   public Graph(int nn){
@@ -146,6 +146,53 @@ class Graph{
         dfs_scc2(e.v,flg,num,now);
       }
     }
+  }
+
+  public boolean cycle(){
+    boolean seen[]=new boolean[n];
+    boolean finished[]=new boolean[n];
+    for(int i=0;i<n;i++){
+      if(!seen[i]){
+        boolean flg = cycledfs(i,seen,finished);
+        if(!flg){return false;}
+      }
+    }
+    return true;
+  }
+
+  private boolean cycledfs(int v,boolean seen[],boolean finished[]){
+    seen[v]=true;
+    for(Edge e:g.get(v)){
+      if(!seen[e.v]){
+        boolean flg = cycledfs(e.v,seen,finished);
+        if(!flg){return false;}
+      }else if(seen[e.v]&&!finished[e.v]){
+        return false;
+      }
+    }
+    finished[v]=true;
+    return true;
+  }
+
+  public ArrayList<Integer> topolo(){
+    ArrayDeque<Integer> q = new ArrayDeque<>();
+    ArrayList<Integer> list = new ArrayList<>();
+    for(int i=0;i<n;i++){
+      if(count[i]==0){
+        q.add(i);
+      }
+    }
+    while(q.size()>0){
+      int v = q.poll();
+      list.add(v+1);
+      for(Edge e:g.get(v)){
+        count[e.v]--;
+        if(count[e.v]==0){
+          q.add(e.v);
+        }
+      }
+    }
+    return list;
   }
 
   static class Edge{

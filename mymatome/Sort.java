@@ -16,4 +16,10 @@ public class Sort{
   public static void sortD(ArrayList<Integer> n[]){
     Collections.sort(n,Collections.reverseOrder());
   }
+  public static void sortA(int n[][],int i){
+    Arrays.sort(n,(a, b) -> Integer.compare(a[i], b[i]));
+  }
+  public static void sortD(int n[][],int i){
+    Arrays.sort(n,(a, b) -> Integer.compare(b[i], a[i]));
+  }
 }

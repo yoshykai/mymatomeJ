@@ -59,4 +59,13 @@ public class Mymath{
     }
     return k*x;
   }
+
+  public static long safeMultiply(long left, long right){
+    if (right > 0 ? left > Long.MAX_VALUE/right || left < Long.MIN_VALUE/right :
+       (right < -1 ? left > Long.MIN_VALUE/right || left < Long.MAX_VALUE/right :
+        right == -1 && left == Long.MIN_VALUE) ) {
+          return -1;
+    }
+    return left * right;
+  }
 }

@@ -26,7 +26,7 @@ public class Input{
       return (char)-1;
     }
   }
-  public String readL(){
+  public String readLine(){
     try{
       return br.readLine();
     }catch(IOException e){
@@ -47,22 +47,32 @@ public class Input{
   public int readI(){
     int r = 0;
     int k = skipread();
+    int flg = 1;
+    if(k=='-'){
+      flg=-1;
+      k=readC();
+    }
     while(true){
       if(!canprint(k)){break;}
       r = r*10+(k-'0');
       k = readC();
     }
-    return r;
+    return flg*r;
   }
-  public long readLong(){
+  public long readL(){
     long r = 0;
     int k = skipread();
+    int flg = 1;
+    if(k=='-'){
+      flg=-1;
+      k=readC();
+    }
     while(true){
       if(!canprint(k)){break;}
       r = r*10+(k-'0');
       k = readC();
     }
-    return r;
+    return flg*r;
   }
   public String[] readSs(int n){
     String[]a = new String[n];
@@ -74,10 +84,10 @@ public class Input{
     for(int i=0;i<n;i++){a[i]=readI();}
     return a;
   }
-  public long[] readLongs(int n){
+  public long[] readLs(int n){
     long[]a = new long[n];
-    for(int i=0;i<n;i++){a[i]=readLong();}
+    for(int i=0;i<n;i++){a[i]=readL();}
     return a;
   }
-  
+
 }

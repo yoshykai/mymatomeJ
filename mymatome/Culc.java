@@ -92,4 +92,9 @@ public class Culc {
 		}
 		return sol;
 	}
+
+	public static double real(String a){
+		int k[] = trans(a);
+		return (double)k[0]/k[1];
+	}
 }

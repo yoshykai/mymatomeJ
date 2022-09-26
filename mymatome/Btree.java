@@ -2,7 +2,7 @@ package mymatome;
 
 import java.util.*;
 
-publi class Btree{
+public class Btree{
   class Node{
     Node left,middle,right;
     int num[];
