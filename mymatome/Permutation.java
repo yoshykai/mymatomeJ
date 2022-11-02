@@ -35,4 +35,20 @@ public class Permutation{
     flg=false;
     return false;
   }
+  public boolean before(){
+    for (int i=n-2;i>=0;i--){
+      if (a[i]>a[i+1]){
+        for (int j=n-1;;j--){
+          if (a[i] > a[j]){
+            int temp=a[i]; a[i]=a[j]; a[j] = temp;
+            i++;
+            for (j=n-1;i<j;i++,j--){
+              temp=a[i]; a[i] = a[j]; a[j] = temp;
+            }
+            return true;
+          }
+    }}}
+    flg=false;
+    return false;
+  }
 }
