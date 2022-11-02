@@ -13,7 +13,7 @@ public class Sort{
   public static void sortA(ArrayList<Integer> n){
     Collections.sort(n);
   }
-  public static void sortD(ArrayList<Integer> n[]){
+  public static void sortD(ArrayList<Integer> n){
     Collections.sort(n,Collections.reverseOrder());
   }
   public static void sortA(int n[][],int i){
