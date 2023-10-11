@@ -5,9 +5,11 @@ import java.io.*;
 
 public class Input{
   private BufferedReader br;
+
   public Input(){
     br = new BufferedReader(new InputStreamReader(System.in));
   }
+
   private boolean canprint(int a){
     return 33<=a&&a<=126;
   }
@@ -18,6 +20,7 @@ public class Input{
     }
     return a;
   }
+
   public char readC(){
     try{
       return (char)br.read();
@@ -26,6 +29,7 @@ public class Input{
       return (char)-1;
     }
   }
+
   public String readLine(){
     try{
       return br.readLine();
@@ -34,16 +38,17 @@ public class Input{
       return "";
     }
   }
+
   public String readS(){
     StringBuilder sb = new StringBuilder();
     int k = skipread();
-    while(true){
-      if(!canprint(k)){break;}
+    while(canprint(k)){
       sb.append((char)k);
       k = readC();
     }
     return sb.toString();
   }
+
   public int readI(){
     int r = 0;
     int k = skipread();
@@ -52,13 +57,13 @@ public class Input{
       flg=-1;
       k=readC();
     }
-    while(true){
-      if(!canprint(k)){break;}
+    while(canprint(k)){
       r = r*10+(k-'0');
       k = readC();
     }
     return flg*r;
   }
+
   public long readL(){
     long r = 0;
     int k = skipread();
@@ -67,13 +72,13 @@ public class Input{
       flg=-1;
       k=readC();
     }
-    while(true){
-      if(!canprint(k)){break;}
+    while(canprint(k)){
       r = r*10+(k-'0');
       k = readC();
     }
     return flg*r;
   }
+  
   public String[] readSs(int n){
     String[]a = new String[n];
     for(int i=0;i<n;i++){a[i]=readS();}
