@@ -36,4 +36,10 @@ public class Sort{
   public static void sortD(int n[][],int i){
     Arrays.sort(n,(a, b) -> Integer.compare(b[i], a[i]));
   }
+  public static void sortA(long n[][],int i){
+    Arrays.sort(n,(a, b) -> Long.compare(a[i], b[i]));
+  }
+  public static void sortD(long n[][],int i){
+    Arrays.sort(n,(a, b) -> Long.compare(b[i], a[i]));
+  }
 }
