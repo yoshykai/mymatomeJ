@@ -10,10 +10,24 @@ public class Sort{
     Arrays.sort(n);
     MyArray.reverse(n);
   }
-  public static void sortA(ArrayList<Integer> n){
+  public static void sortA(long n[]){
+    Arrays.sort(n);
+  }
+  public static void sortD(long n[]){
+    Arrays.sort(n);
+    MyArray.reverse(n);
+  }
+  public static <T extends Comparable<T>> void sortA(T n[]){
+    Arrays.sort(n);
+  }
+  public static <T extends Comparable<T>> void sortD(T n[]){
+    Arrays.sort(n);
+    MyArray.reverse(n);
+  }
+  public static <T extends Comparable<T>> void sortA(ArrayList<T> n){
     Collections.sort(n);
   }
-  public static void sortD(ArrayList<Integer> n){
+  public static <T extends Comparable<T>> void sortD(ArrayList<T> n){
     Collections.sort(n,Collections.reverseOrder());
   }
   public static void sortA(int n[][],int i){

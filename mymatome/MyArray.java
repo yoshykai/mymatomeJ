@@ -3,9 +3,6 @@ package mymatome;
 import java.util.*;
 
 public class MyArray{
-  public static <T> ArrayList<T> make(T a){ //リストの作成
-    return new ArrayList<T>();
-  }
   public static int[] append(int a[],int b[]){ //配列の結合
     int c[] = new int[a.length+b.length];
     int s=a.length,l=b.length;
@@ -43,14 +40,31 @@ public class MyArray{
     ArrayList<Integer> result = new ArrayList<Integer>(re);
     return result;
   }
-
-  public static void exchange(int[]a,int i,int j){
+  public static void exchange(int a[],int i,int j){
     int k=a[i];a[i]=a[j];a[j]=k;
+  }
+  public static void exchange(long a[],int i,int j){
+    long k=a[i];a[i]=a[j];a[j]=k;
+  }
+  public static <T>void exchange(T a[],int i,int j){
+    T k=a[i];a[i]=a[j];a[j]=k;
   }
   public static <T>void exchange(ArrayList<T>a,int i,int j){
     T k=a.get(i);a.set(i,a.get(j));a.set(j,k);
   }
   public static void reverse(int a[]){ //配列を逆順に
+    int n=a.length;
+    for(int i=0;i<n/2;i++){
+      exchange(a,i,n-i-1);
+    }
+  }
+  public static void reverse(long a[]){
+    int n=a.length;
+    for(int i=0;i<n/2;i++){
+      exchange(a,i,n-i-1);
+    }
+  }
+  public static <T>void reverse(T a[]){ 
     int n=a.length;
     for(int i=0;i<n/2;i++){
       exchange(a,i,n-i-1);
