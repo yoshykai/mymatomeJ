@@ -21,4 +21,7 @@ public class Listlist<T>{
   public int size(){
     return list.size();
   }
+  public int size(int index){
+    return list.get(index).size();
+  }
 }
