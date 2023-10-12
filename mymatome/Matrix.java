@@ -100,7 +100,7 @@ public class Matrix {
 			for(int j=0;j<b.width();j++){
 				double sum = 0;
 				for(int k=0;k<a.width();k++){
-					sum += a.get(i, k)+b.get(k, j);
+					sum += a.get(i, k)*b.get(k, j);
 				}
 				c.set(i, j, sum);
 			}
