@@ -3,7 +3,7 @@ package mymatome;
 import java.util.*;
 
 public class MyMap<T>{
-  HashMap<T,Integer> map;
+  HashMap<T,Long> map;
   boolean mFlg; //0以下を許容するか
 
   public MyMap(){
@@ -19,7 +19,7 @@ public class MyMap<T>{
     put(a,1);
   }
 
-  public void put(T a,int n){
+  public void put(T a,long n){
     map.put(a,n);
     delM(a);
   }
@@ -28,7 +28,7 @@ public class MyMap<T>{
     add(a,1);
   }
 
-  public void add(T a,int n){
+  public void add(T a,long n){
     if(map.containsKey(a)){
       map.replace(a,get(a)+n);
     }else{
@@ -51,7 +51,7 @@ public class MyMap<T>{
     return map.size();
   }
 
-  public int get(T a){
+  public long get(T a){
     if(!contain(a)){
       return 0;
     }
